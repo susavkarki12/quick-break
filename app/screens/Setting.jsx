@@ -56,7 +56,7 @@ export const Setting = ({navigation}) => {
 
 
   return (
-    <View style={{ marginTop: wp('12%'), paddingHorizontal: 0 ,backgroundColor:isDarkMode? "#001F3F" : "white"}}>
+    <View style={{ paddingHorizontal: 0 ,backgroundColor:isDarkMode? "#001F3F" : "white"}}>
       <View
         style={{
           flexDirection: "row",

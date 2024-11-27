@@ -7,7 +7,7 @@ import { LinearGradient } from "expo-linear-gradient";
 const PreAppSelection = ({ navigation }) => {
 
     const nav=()=>{
-        navigation.navigate("SeeMoreGraph")
+        navigation.navigate("DashBoard")
     }
 
     return (
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     },
     container: {
         height: hp('100%'),
-        marginTop: hp('5%'),
+       
         backgroundColor: "black"
     },
     firstText: {

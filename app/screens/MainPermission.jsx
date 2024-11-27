@@ -12,7 +12,7 @@ const MainPermission = ({navigation}) => {
 
     return (
         <View style={styles.topView}>
-            <Text style={[styles.topText, { marginTop: hp('8%'), }]}>Final step! Allow these{"\n"}
+            <Text style={styles.topText}>Final step! Allow these{"\n"}
                 permissions to finish setup.</Text>
             <View style={styles.containerView}>
                 <Text style={styles.primaryText}>Background Permission {"\n"}

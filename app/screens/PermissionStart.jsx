@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         fontWeight: "bold",
         fontSize: hp('8%'),
-        marginTop: hp('18%'),
+        marginTop: hp('13%'),
         color: "white"
     },
     secondText: {

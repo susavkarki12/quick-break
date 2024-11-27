@@ -2,14 +2,17 @@ import { View, Text, StyleSheet, SafeAreaView, StatusBar, Dimensions, TouchableO
 import React, { useState, useEffect } from 'react';
 import { LineChart, BarChart } from "react-native-gifted-charts";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { FontAwesome, Fontisto, Ionicons } from "@expo/vector-icons";
+import { FontAwesome, Fontisto, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { ThemedButton } from 'react-native-really-awesome-button';
+import Apps from '../constants/Apps';
+import * as Progress from 'react-native-progress';
 
 
 const apps = ["Facebook", "Twitter", "PUBG", "Instagram"];
 
 const SeeMoreGraph = () => {
-  const data = [15, 30, 26, 40, 35, 32, 21, 32, 14, 35, 12, 38];
+  const time = [25, 30, 35, 15, 35, 32, 21, 32, 14, 35, 12, 38];
+  const data= [250, 390, 1000, 150]
   const [isLine, changeSelection] = useState(true)
   const [total, setTotal] = useState(0)
 
@@ -19,44 +22,47 @@ const SeeMoreGraph = () => {
     )
   }
 
+  const scaledData= new Array()
 
+  data.map((item, index)=>(
+    scaledData[index]= (item-0)/(1440-0)
+  ))
   useEffect(() => {
-    const sum = data.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+    const sum = time.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
     const timeFormatted = convertSecondsToTime(sum); // Convert total seconds to time format
     setTotal(timeFormatted);
-    
+
   }, [])
 
   const convertSecondsToTime = (totalSeconds) => {
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
-    if(hours!== 0 && minutes!== 0 && seconds!== 0){
+    if (hours !== 0 && minutes !== 0 && seconds !== 0) {
       return `${hours}h ${minutes}m ${seconds}s`;
     }
-    else if(minutes!==0 && seconds!==0){
+    else if (minutes !== 0 && seconds !== 0) {
       return ` ${minutes}m ${seconds}s`;
     }
-    else if(hours!==0 && minutes!==0){
+    else if (hours !== 0 && minutes !== 0) {
       return `${hours}h ${minutes}m `;
     }
-    else if(hours!== 0 && seconds!== 0){
+    else if (hours !== 0 && seconds !== 0) {
       return `${hours}h ${seconds}s`;
     }
-    else if(hours!==0){
+    else if (hours !== 0) {
       return `${hours}h `;
     }
-    else if(minutes!==0){
+    else if (minutes !== 0) {
       return `${minutes}h `;
     }
-    else if(seconds!==0){
+    else if (seconds !== 0) {
       return `${seconds}h `;
     }
-    else{
-      return `something is zero`
-    }
 
-    
+
+
+
   };
 
   const [selectedGraph, setSelectedGraph] = useState('line');
@@ -140,7 +146,7 @@ const SeeMoreGraph = () => {
               noOfSections={5}
               curved
               showVerticalLines
-              data={data.map((item, index) => {
+              data={time.map((item, index) => {
                 return { value: item, label: item };
               })}
             />
@@ -149,7 +155,7 @@ const SeeMoreGraph = () => {
 
           <View>
             <BarChart
-              data={data.map((item) => {
+              data={time.map((item) => {
                 return { value: item, label: item }
               })}
               barWidth={22}
@@ -163,6 +169,32 @@ const SeeMoreGraph = () => {
         }
         <Text>Total Usage: {total}</Text>
       </View>
+      {
+        Apps.map((item, index) => (
+          <View style={{ flexDirection: "row",marginTop: hp('0.5%'), marginLeft: wp('2%') }}>
+            {item.icon}
+            <View style={{ marginLeft: wp('4%')}}>
+              <Text style={styles.appName}>{item.app}</Text>
+              <Progress.Bar 
+                progress={scaledData[index]} 
+                width={wp('60%')} 
+                borderWidth= {0}
+                style={{marginTop: hp('0.6%')}}
+                color= {item.color}
+              />
+ 
+            </View>
+
+            <View>
+              <Text style={{fontSize: hp('2%'), fontFamily: "TTHoves"}}>{convertSecondsToTime(data[index])}</Text>
+              <Text style={{fontSize: hp('2%'), fontFamily: "TTHoves"}}>{Math.floor((data[index]/1440)*100)}%</Text>
+            </View>
+            
+          </View>
+        ))
+      }
+
+
     </SafeAreaView>
   );
 }
@@ -194,6 +226,10 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
   },
+  appName: {
+    fontSize: hp('2.5%'),
+    fontFamily: "TTHoves"
+  }
 })
 
 export default SeeMoreGraph;

@@ -41,13 +41,7 @@ const DashBoard = ({ navigation }) => {
           source={require("./icons/logo.png")} />
         <Text style={styles.text}>FreeDAY</Text>
 
-        <Image
-          style={styles.searchLogo}
-          source={require("./icons/search.png")} />
-        <TextInput
-          style={styles.input}
-          placeholder="Search Here"
-        />
+        
       </View>
 
       <View style={{
@@ -236,7 +230,7 @@ const DashBoard = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   mainView: {
-    marginTop: "12%",
+    marginTop: "7%",
     height: "100%",
 
   },
@@ -254,7 +248,7 @@ const styles = StyleSheet.create({
     width: "20%",
     height: "7%",
     marginLeft: "2%",
-    marginTop: 0
+   
   },
 
   text: {

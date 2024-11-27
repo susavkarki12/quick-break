@@ -14,7 +14,7 @@ const VipComponent = () => {
 
   return (
     <View style={{height:hp('100%'),backgroundColor:isDarkMode? "#001F3F" : "white"}}>
-      <Text style={{...styles.mainText, marginTop: hp('7%'),color:isDarkMode?"white":"black"}}>VIP PREMIUM</Text>
+      <Text style={{...styles.mainText,color:isDarkMode?"white":"black"}}>VIP PREMIUM</Text>
 
       <Text style={{...styles.mainText,color:isDarkMode?"white":"black"}}>Upgrade to <Text style={{ color: "#ff3131" }}>VIP</Text> Member!</Text>
       <Text style={{...styles.secondText,color:isDarkMode?"white":"black"}}>Unlock premium features to personalize your
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
 
   mainText: {
     fontFamily: "TTHoves",
-    marginTop: hp('5%'),
+    
     fontSize: hp('4%'),
     fontWeight: "bold",
     letterSpacing: 1,
