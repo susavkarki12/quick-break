@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
 
   Text,
@@ -8,21 +8,22 @@ import {
   TouchableOpacity,
   Animated,
   Image,
-  Dimensions
+  Dimensions,
+  StatusBar
 } from "react-native";
 import { ThemeContext } from "../Context/ThemeContext";
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
 import { LinearGradient } from "expo-linear-gradient";
 
 
-const {width, height}= Dimensions.get("screen")
+const { width, height } = Dimensions.get("screen")
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 
 
-export const Setting = ({navigation}) => {
+export const Setting = ({ navigation }) => {
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
   const [isOn, setIsOn] = useState(false);
   const [isOnone, setIsOnone] = useState(false);
@@ -31,7 +32,7 @@ export const Setting = ({navigation}) => {
   useEffect(() => {
     setIsOn(isDarkMode);
   }, [isDarkMode]);
-  
+
   const toggleSwitch = () => {
     Animated.timing(position, {
       toValue: isOn ? 0 : 38, // Toggle between the two positions
@@ -49,14 +50,16 @@ export const Setting = ({navigation}) => {
     }).start();
     setIsOnone(!isOnone);
   };
- 
-  const navtodash=()=>{
+
+  const navtodash = () => {
     navigation.navigate("DashBoard")
   }
 
 
   return (
-    <View style={{ paddingHorizontal: 0 ,backgroundColor:isDarkMode? "#001F3F" : "white"}}>
+    <View style={{ paddingHorizontal: 0, backgroundColor: isDarkMode ? "#001F3F" : "white" }}>
+      <StatusBar barStyle="default" />
+
       <View
         style={{
           flexDirection: "row",
@@ -66,7 +69,7 @@ export const Setting = ({navigation}) => {
         }}
       >
         <View>
-          <TouchableOpacity onPress={navtodash}><FontAwesome name="angle-left" size={23} color={isDarkMode?"white":"black"} /></TouchableOpacity>
+          <TouchableOpacity onPress={navtodash}><FontAwesome name="angle-left" size={23} color={isDarkMode ? "white" : "black"} /></TouchableOpacity>
         </View>
         <Text
           style={{
@@ -74,19 +77,19 @@ export const Setting = ({navigation}) => {
             fontWeight: "bold",
             letterSpacing: 1,
             fontSize: wp('5%'),
-            color:isDarkMode?"white":"black"
+            color: isDarkMode ? "white" : "black"
           }}
         >
           Settings
         </Text>
       </View>
-      <View style={{ 
-        marginTop: hp('2%') 
-        }}>
-        <Text style={{ 
+      <View style={{
+        marginTop: hp('2%')
+      }}>
+        <Text style={{
           paddingLeft: wp('5%'),
-          fontSize: hp('2.2%') ,
-          color:isDarkMode?"white":"black"
+          fontSize: hp('2.2%'),
+          color: isDarkMode ? "white" : "black"
         }}>General</Text>
         <View
           style={{
@@ -102,15 +105,15 @@ export const Setting = ({navigation}) => {
             <MaterialIcons
               name="language"
               //size={17}
-              color={isDarkMode?"white":"black"}
+              color={isDarkMode ? "white" : "black"}
               style={styles.icon}
             />
             <View style={{ flexDirection: "column", paddingVertical: 2 }}>
-              <Text  style={{...styles.mainText,color:isDarkMode?"white":"black"}}>English</Text>
-              <Text style={{...styles.secondText,color:isDarkMode?"white":"black"}}>Language</Text>
+              <Text style={{ ...styles.mainText, color: isDarkMode ? "white" : "black" }}>English</Text>
+              <Text style={{ ...styles.secondText, color: isDarkMode ? "white" : "black" }}>Language</Text>
             </View>
           </View>
-          <FontAwesome name="angle-right" size={15} color={isDarkMode?"white":"black"} />
+          <FontAwesome name="angle-right" size={15} color={isDarkMode ? "white" : "black"} />
         </View>
         <View
           style={{
@@ -126,18 +129,18 @@ export const Setting = ({navigation}) => {
             <MaterialIcons
               name="volume-off"
               size={17}
-              color={isDarkMode?"white":"black"}
+              color={isDarkMode ? "white" : "black"}
               style={styles.icon}
             />
             <View style={{ flexDirection: "column", paddingVertical: 2 }}>
-              <Text style={{...styles.mainText,color:isDarkMode?"white":"black"}}>Silent Mode</Text>
-              <Text style={{...styles.secondText,color:isDarkMode?"white":"black"}}>
+              <Text style={{ ...styles.mainText, color: isDarkMode ? "white" : "black" }}>Silent Mode</Text>
+              <Text style={{ ...styles.secondText, color: isDarkMode ? "white" : "black" }}>
                 Noctifications & Message
               </Text>
             </View>
           </View>
           <View style={styles.switchBackground}>
-            <TouchableOpacity  onPress={toggleSwitchone}>
+            <TouchableOpacity onPress={toggleSwitchone}>
               <Animated.View style={[styles.circle, { left: positionone }]} />
             </TouchableOpacity>
           </View>
@@ -156,12 +159,12 @@ export const Setting = ({navigation}) => {
             <FontAwesome
               name="cog"
               size={17}
-              color={isDarkMode?"white":"black"}
-              style={[styles.icon, {marginLeft: wp('0.9%')}]}
+              color={isDarkMode ? "white" : "black"}
+              style={[styles.icon, { marginLeft: wp('0.9%') }]}
             />
             <View style={{ flexDirection: "column", paddingVertical: 2 }}>
-              <Text style={{...styles.mainText,color:isDarkMode?"white":"black"}}>Mode</Text>
-              <Text style={{...styles.secondText,color:isDarkMode?"white":"black"}}>Dark & Light</Text>
+              <Text style={{ ...styles.mainText, color: isDarkMode ? "white" : "black" }}>Mode</Text>
+              <Text style={{ ...styles.secondText, color: isDarkMode ? "white" : "black" }}>Dark & Light</Text>
             </View>
           </View>
           {/*<View style={{height:20,width:40,borderWidth:1,borderRadius:45,backgroundColor:'#FF4500',borderColor:'#FF4500'}}>
@@ -173,10 +176,10 @@ export const Setting = ({navigation}) => {
               <Animated.View style={[styles.circle, { left: position }]} />
             </TouchableOpacity>
           </View>
-          
-          
-          
-          
+
+
+
+
 
         </View>
         <View
@@ -193,25 +196,25 @@ export const Setting = ({navigation}) => {
             <FontAwesome
               name="mobile"
               size={17}
-              color={isDarkMode?"white":"black"}
-              style={[styles.icon,{
+              color={isDarkMode ? "white" : "black"}
+              style={[styles.icon, {
                 fontSize: hp('4%'),
                 marginLeft: wp('2%')
               }]}
             />
             <View style={{ flexDirection: "column", paddingVertical: 2 }}>
-              <Text style={{...styles.mainText,color:isDarkMode?"white":"black"}}>
+              <Text style={{ ...styles.mainText, color: isDarkMode ? "white" : "black" }}>
                 Previous Usage, Launches & Access
               </Text>
-              <Text style={{...styles.secondText,color:isDarkMode?"white":"black"}}>
+              <Text style={{ ...styles.secondText, color: isDarkMode ? "white" : "black" }}>
                 Device Permissions
               </Text>
             </View>
           </View>
-          <FontAwesome name="angle-right" size={23} color={isDarkMode?"white":"black"}/>
+          <FontAwesome name="angle-right" size={23} color={isDarkMode ? "white" : "black"} />
         </View>
       </View>
-      <Text style={{ paddingLeft: wp('5%'), marginTop: hp('3%'), fontSize: hp('2.2%'),color:isDarkMode?"white":"black" }}>Learn More</Text>
+      <Text style={{ paddingLeft: wp('5%'), marginTop: hp('3%'), fontSize: hp('2.2%'), color: isDarkMode ? "white" : "black" }}>Learn More</Text>
       <View
         style={styles.learrnMore}
       >
@@ -227,7 +230,7 @@ export const Setting = ({navigation}) => {
           </View>
 
           <View style={{ flexDirection: "column", paddingVertical: 2 }}>
-            <Text style={{...styles.mainText,color:isDarkMode?"white":"black"}}>About</Text>
+            <Text style={{ ...styles.mainText, color: isDarkMode ? "white" : "black" }}>About</Text>
           </View>
         </View>
         <FontAwesome name="angle-right" size={23} color="black" />
@@ -237,7 +240,7 @@ export const Setting = ({navigation}) => {
       >
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <View style={styles.design}>
-            <View style={styles.outercircleone }>
+            <View style={styles.outercircleone}>
               <View style={styles.innercircleone}>
                 <View style={styles.logo}>
                   <FontAwesome name="exclamation" size={20} color="blue" />
@@ -246,7 +249,7 @@ export const Setting = ({navigation}) => {
             </View>
           </View>
           <View style={{ flexDirection: "column", paddingVertical: 2 }}>
-            <Text style={{...styles.mainText,color:isDarkMode?"white":"black"}}>
+            <Text style={{ ...styles.mainText, color: isDarkMode ? "white" : "black" }}>
               Terms & Conditions
             </Text>
           </View>
@@ -265,7 +268,7 @@ export const Setting = ({navigation}) => {
             </View>
           </View>
           <View style={{ flexDirection: "column", paddingVertical: 2 }}>
-            <Text style={{...styles.mainText,color:isDarkMode?"white":"black"}}>
+            <Text style={{ ...styles.mainText, color: isDarkMode ? "white" : "black" }}>
               Privacy Policy
             </Text>
           </View>
@@ -282,7 +285,7 @@ export const Setting = ({navigation}) => {
             </View>
           </View>
           <View style={{ flexDirection: "column", paddingVertical: 2 }}>
-            <Text style={{...styles.mainText,color:isDarkMode?"white":"black"}}>Rate This App</Text>
+            <Text style={{ ...styles.mainText, color: isDarkMode ? "white" : "black" }}>Rate This App</Text>
           </View>
         </View>
         <FontAwesome name="angle-right" size={23} color="black" />
@@ -297,8 +300,8 @@ export const Setting = ({navigation}) => {
             </View>
           </View>
 
-          <View style={{ flexDirection: "column"  }}>
-            <Text style={{...styles.mainText,color:isDarkMode?"white":"black"}}>
+          <View style={{ flexDirection: "column" }}>
+            <Text style={{ ...styles.mainText, color: isDarkMode ? "white" : "black" }}>
               Share This App
             </Text>
           </View>
@@ -312,7 +315,7 @@ export const Setting = ({navigation}) => {
         end={{ x: 1, y: 0 }}
         style={{
           width: wp('95%'),
-          
+
           marginLeft: wp('2%'),
           borderRadius: 30,
           //marginRight: wp('20%'),
@@ -325,7 +328,7 @@ export const Setting = ({navigation}) => {
             width: "12%",
             height: "100%",
             marginLeft: "2%",
-            
+
             marginBottom: "2%"
 
           }}
@@ -334,7 +337,7 @@ export const Setting = ({navigation}) => {
         <Text style={{
           fontFamily: "TTHoves",
           color: "white",
-          width:"22%",
+          width: "22%",
           marginTop: "5%",
           fontSize: 15,
           marginLeft: "5%"
@@ -348,13 +351,13 @@ export const Setting = ({navigation}) => {
           marginRight: "8%"
         }} />
         <TouchableOpacity onPress={navtodash}>
-        <Image
-          style={[styles.footerLogo, {
-            width: wp('12%')
-          }]}
-          
-          source={require("./icons/1.png")}
-        />
+          <Image
+            style={[styles.footerLogo, {
+              width: wp('12%')
+            }]}
+
+            source={require("./icons/1.png")}
+          />
         </TouchableOpacity>
         <Image
           style={styles.footerLogo}
@@ -365,9 +368,9 @@ export const Setting = ({navigation}) => {
           source={require("./icons/4.png")}
         />
       </LinearGradient>
-      
+
     </View>
-   
+
   );
 };
 
@@ -376,7 +379,7 @@ export const Setting = ({navigation}) => {
 
 const styles = StyleSheet.create({
   icon: {
-    
+
     fontSize: hp('3%'),
   },
 
@@ -388,13 +391,13 @@ const styles = StyleSheet.create({
     borderColor: "black",
     alignItems: "center",
   },
-  mainText:{
+  mainText: {
     fontFamily: "TTHoves",
     paddingLeft: wp('3.2%'),
     fontSize: hp('2%')
-    
+
   },
-  secondText:{
+  secondText: {
     fontFamily: "TTHoves",
     fontSize: hp('1.3%'),
     paddingLeft: wp('3.1%')
@@ -410,7 +413,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#a366ff",
   },
   logo: {
-    marginTop:hp('0.3%'),
+    marginTop: hp('0.3%'),
     height: "auto",
   },
   outercircleone: {
@@ -511,5 +514,5 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 50,
     borderTopRightRadius: 50,
   }
-  
+
 });

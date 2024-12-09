@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity, StatusBar } from 'react-native'
 import React from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { LinearGradient } from "expo-linear-gradient";
@@ -12,6 +12,7 @@ const PreAppSelection = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
+      <StatusBar barStyle="default" />
 
             <Text style={styles.firstText}>Now, let's start to focus</Text>
             <Text style={styles.secondText}>Select upto 3 distracting Apps</Text>

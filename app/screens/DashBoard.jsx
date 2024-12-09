@@ -1,299 +1,224 @@
-import { View, Text, Image, Platform, StyleSheet, TextInput, Dimensions, KeyboardAvoidingView, Pressable, TouchableOpacity } from 'react-native'
+import { View, Text, SafeAreaView, StatusBar, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { useContext } from 'react';
 import { LinearGradient } from "expo-linear-gradient";
-const { height, width } = Dimensions.get("screen")
-import { BarChart } from "react-native-chart-kit";
-import { useNavigation, Link } from "@react-navigation/native";
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { BarChart } from "react-native-gifted-charts";
 const rgba = (r, g, b, a) => `rgba(${r}, ${g}, ${b}, ${a})`;
-import { ThemeContext } from '../Context/ThemeContext';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { FontAwesome5, FontAwesome, Fontisto, Ionicons, MaterialIcons } from "@expo/vector-icons";
 
-const data = {
-  labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-  datasets: [
-    {
-      data: [20, 45, 28, 80, 99, 43, 34]
-    }
-  ]
-};
+
+const rawData = [20, 45, 28, 80, 99, 43, 34];
+const labels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+const data = rawData.map((item, index) => ({
+  value: item,
+  label: labels[index]
+}))
 
 const DashBoard = ({ navigation }) => {
-  //const navigation = useNavigation();
-  const { isDarkMode } = useContext(ThemeContext);
-  const nav = () => {
-    navigation.navigate("Setting")
-  }
-  const navtovip = () => {
+
+  const navToVIP = () => {
     navigation.navigate("vip")
   }
 
-  const navtograph = () => {
+  const navToSeeMore = () => {
     navigation.navigate("SeeMoreGraph")
   }
 
+  const navToSettings=()=>{
+    navigation.navigate("Setting")
+  }
+
   return (
-
-    <View style={{ ...styles.mainView, backgroundColor: isDarkMode ? "#001F3F" : "white" }}>
-      <View style={styles.topView}>
-        <Image
-          style={styles.logo}
-          source={require("./icons/logo.png")} />
-        <Text style={styles.text}>FreeDAY</Text>
-
-        
-      </View>
-
-      <View style={{
-        //marginTop:-40,
-        flexDirection: "row",
-        width: "80%",
-        height: "80%"
-      }}>
-        <Text style={{
-          fontFamily: "TTHoves",
-          marginLeft: "5%",
-          fontSize: 33
-        }}>Just keep moving {"\n"} forward</Text>
-
+    <SafeAreaView>
+      <StatusBar barStyle="default" />
+      <View style={styles.topRow}>
         <Image
           style={{
-            width: "30%",
-            height: "15%"
+            width: wp('16%'),
+            height: hp('10%')
           }}
-          source={require("./icons/logo.png")}
-        />
+          source={require("./icons/logo.png")} />
+        <Text style={{
+          fontFamily: "TTHoves",
+          fontSize: hp('3%'),
+          marginTop: hp('2.5%')
+        }}>  Quick Break </Text>
       </View>
-
-      <View >
+      <View style={styles.topRow}>
+        <Text style={{
+          fontFamily: "TTHoves",
+          fontSize: hp('3%'),
+          fontWeight: "bold",
+          flex: 1
+        }}>Just Keep moving {"\n"}Forward.</Text>
+        <Image
+          style={{
+            width: wp('16%'),
+            height: hp('10%'),
+            marginRight: wp('5%')
+          }}
+          source={require("./icons/logo.png")} />
+      </View>
+      <TouchableOpacity onPress={navToVIP}>
         <LinearGradient
           colors={["#ff3131", "#ff914d"]}
           start={{ x: 0, y: 1 }}
           end={{ x: 1, y: 0 }}
           style={{
-            marginTop: "-133%",
-            marginLeft: "3%",
-            borderTopLeftRadius: 20,
-            borderBottomLeftRadius: 20,
-            borderBottomRightRadius: 20,
-            borderTopRightRadius: 20,
-            marginRight: "3%",
-            flexDirection: "row"
+            borderRadius: 20,
+            marginHorizontal: wp('4%')
           }}
         >
-          <TouchableOpacity onPress={navtovip}>
-            <Text style={{
-              fontFamily: "TTHoves",
-              paddingLeft: "5%",
-              paddingTop: "4%",
-              paddingBottom: "3.5%",
-              fontSize: 25,
-              color: "white"
-            }}>Upgrade To Premium {"\n"} {"\n"}
+          <View style={{
+            flexDirection: "row",
+            marginHorizontal: wp('4%')
+          }}>
+            <View style={{
+              flex: 1
+            }}>
               <Text style={{
-                fontSize: 15,
-                //paddingTopTop: -20
+                fontFamily: "TTHoves",
+                fontSize: hp('3%'),
+                marginTop: hp('2%'),
+                color: "white",
+                fontWeight: "bold"
+              }}>Upgrade To Premium </Text>
+              <Text style={{
+                fontSize: hp('1.8%'),
+                marginVertical: hp('2%'),
+                fontFamily: "TTHoves",
+                color: "white"
               }}>Become a VIP Member to get {"\n"}
                 Unlimited Apps & more Features!
               </Text>
-            </Text>
-          </TouchableOpacity>
-          <Image
-            style={{
-              width: "22%",
-              height: "63%",
-              marginLeft: "3%",
-              marginTop: "6%"
 
-            }}
-            source={require("./icons/8.png")}
-          />
+            </View>
+
+            <Image
+              style={{
+                width: wp('22%'),
+                height: hp('15%'),
+                //marginLeft: wp('4%')
+              }}
+              source={require("./icons/8.png")}
+            />
+          </View>
         </LinearGradient>
-      </View>
+      </TouchableOpacity>
 
-
-
-      <View style={{ flexDirection: "row" }}>
+      <View style={{
+        flexDirection: "row",
+        marginLeft: wp('5%'),
+        marginTop: ('12%')
+      }}>
         <Text style={{
           fontFamily: "TTHoves",
-          fontSize: 20,
-          marginTop: "-96%",
-          marginLeft: "5%"
+          fontSize: hp('2.5%'),
+          //fontWeight: "bold"
         }}>Usages</Text>
-        <TouchableOpacity onPress={navtograph}>
+        <FontAwesome5 name="fire-alt" size={19} color="red" style={{
+          flex: 1,
+          marginTop: hp('0.5%'),
+          marginLeft: wp('1%')
+        }} />
+        <TouchableOpacity onPress={navToSeeMore}>
           <Text style={{
             fontFamily: "TTHoves",
-            marginTop: "-400%",
-            fontSize: 18,
-            color: "black"
-          }}>See more  </Text></TouchableOpacity>
+            fontSize: hp('2%'),
+            marginRight: wp('4%'),
+            color: "purple",
+            marginTop: hp('0.5%')
+          }}> See More!</Text>
+        </TouchableOpacity>
       </View>
 
-      <BarChart
-        style={{
-          marginTop: "-85%",
-          marginLeft: "4%",
-          borderRadius: 20,
-          width: "50%",
-          height: "20%"
-        }}
-        fromZero
-        data={data}
-        width={Dimensions.get("screen").width - 30}
-        height={260}
-        horizontalLabelRotation={0}
-        chartConfig={{
-          //backgroundGradientFrom: "white",
-          backgroundGradientFromOpacity: 1,
-          //backgroundGradientTo: "white",
-          backgroundGradientToOpacity: 0.8,
-          color: (opacity = 1) => rgba(26, 255, 146, opacity),
-          strokeWidth: 2, // optional, default 3
-          barPercentage: 0.5,
-          useShadowColorFromDataset: false // optional
-        }}
-        verticalLabelRotation={30}
-      />
+      <View style={{
+        marginHorizontal: wp('4%'),
+        marginTop: hp('4%'),        
+      }}>
+        <BarChart
+          data={data}
+          barWidth={22}
+          noOfSections={5}
+          width={wp('80%')}
+          height={hp('18%')}
+          frontColor="purple"
+        />
+      </View>
 
       <LinearGradient
         colors={["#ff3131", "#ff914d"]}
         start={{ x: 0, y: 1 }}
         end={{ x: 1, y: 0 }}
         style={{
-          width: "95%",
-          marginLeft: 11,
+          //width: wp('93%'),
+          marginHorizontal: wp('4%'),
           borderRadius: 30,
-          marginRight: "40%",
-          marginTop: "30%",
-          flexDirection: "row"
+          flexDirection: "row",
+          marginTop: hp('20%')
         }}
       >
-        <Image
-          style={{
-            width: "12%",
-            height: "100%",
-            marginLeft: "2%",
-
-            marginBottom: "2%"
-
-          }}
-          source={require("./icons/1.png")}
-        />
+        <Ionicons name="compass" size={wp('12%')} color="white" />
         <Text style={{
           fontFamily: "TTHoves",
           color: "white",
-          width: "22%",
-          marginTop: "5%",
-          fontSize: 15,
-          marginLeft: "5%"
+          fontSize: hp('2%'),
+          marginVertical: hp('1.5%'),
+          marginHorizontal: wp('2%')
         }}>DashBoard</Text>
         <View style={{
-          width: "0.5%",
-          height: "35%",
+          width: wp("0.5%"),
+          height: hp("2%"),
           backgroundColor: "white",
-          marginTop: "5%",
-          marginLeft: "5%",
-          marginRight: "8%"
+          marginVertical: hp('2%'),
+          marginHorizontal: wp('5%')
         }} />
-
-        <TouchableOpacity onPress={nav}>
-
-
-
-          <Image
-            style={[styles.footerLogo, {
-              width: wp('12%')
-            }]}
-
-            source={require("./icons/2.png")}
-          />
-
-
-
+        <TouchableOpacity onPress={navToSettings}>
+          <View style={[styles.footerLogo, {            
+            marginLeft: wp('2%')
+          }]}>
+            <Fontisto
+              style={{
+                marginLeft: wp('1.85%'),
+                marginTop: hp('0.7%')
+              }}
+              name="player-settings" size={wp('7%')} color="white" />
+          </View>
         </TouchableOpacity>
 
-        <Image
-          style={[styles.footerLogo]}
-          source={require("./icons/3.png")}
-        />
-        <Image
-          style={styles.footerLogo}
-          source={require("./icons/4.png")}
-        />
+        <View style={[styles.footerLogo, {            
+            marginHorizontal: wp('4%'),
+          }]}>
+          <FontAwesome style={{
+            marginLeft: wp('1.7%'),
+            marginTop: hp('0.8%'),
+          }} name="bell" size={wp('7%')} color="white" />
+        </View>
+        <View style={[styles.footerLogo]}
+          source={require("./icons/4.png")}>
+          <Ionicons style={{
+            marginLeft: wp('1.7%'),
+            marginTop: hp('0.8%')
+          }} name="person" size={wp('7%')} color="white" />
+        </View>
       </LinearGradient>
-
-    </View>
-
-
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
-  mainView: {
-    marginTop: "7%",
-    height: "100%",
-
-  },
-
-  topView: {
-    paddingTop: 0,
-    width: "80%",
-    height: "100%",
+  topRow: {
     flexDirection: "row",
-    marginBottom: "-195%",
-
+    marginLeft: wp('5%')
   },
-
-  logo: {
-    width: "20%",
-    height: "7%",
-    marginLeft: "2%",
-   
-  },
-
-  text: {
-    marginTop: 10,
-    marginLeft: 10,
-    fontSize: 20,
-    fontFamily: "TTHoves",
-  },
-
-  searchLogo: {
-    width: "10%",
-    height: "05%",
-    marginLeft: 100,
-    marginTop: 10
-  },
-
-  input: {
-    width: "28%",
-    height: "5%",
-    marginLeft: 0,
-    marginRight: 20,
-    borderWidth: 0.3,
-    paddingLeft: 10,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    position: "sticky",
-    marginTop: 10,
-    backgroundColor: "transparent",
-
-  },
-
   footerLogo: {
-    width: "12%",
-    height: 45,
-    marginLeft: 8,
-    marginTop: 8,
-    marginBottom: "2%",
+    width: wp('11%'),
+    height: hp('5%'),
+    marginVertical: hp('0.5%'),
     borderWidth: 1,
     borderColor: "white",
-    borderTopLeftRadius: 50,
-    borderBottomLeftRadius: 50,
-    borderBottomRightRadius: 50,
-    borderTopRightRadius: 50,
+    borderRadius: 50,
   }
 })
 

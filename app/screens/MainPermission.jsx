@@ -4,14 +4,17 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { LinearGradient } from "expo-linear-gradient";
 
 
-const MainPermission = ({navigation}) => {
+const MainPermission = ({ navigation }) => {
 
-    const nav=()=>{
-        navigation.navigate("DashBoard")
-    }    
+    const nav = () => {
+        navigation.navigate("PreAppSelection")
+    }
 
     return (
+
         <View style={styles.topView}>
+            <StatusBar barStyle="default" />
+
             <Text style={styles.topText}>Final step! Allow these{"\n"}
                 permissions to finish setup.</Text>
             <View style={styles.containerView}>
@@ -34,17 +37,17 @@ const MainPermission = ({navigation}) => {
 
             </View>
             <TouchableOpacity onPress={nav} >
-            <LinearGradient
-                colors={["#ff3131", "#ff914d"]}
-                start={{ x: 0, y: 1 }}
-                end={{ x: 1, y: 0 }}
-                style={styles.linearGrad}
-            >
+                <LinearGradient
+                    colors={["#ff3131", "#ff914d"]}
+                    start={{ x: 0, y: 1 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.linearGrad}
+                >
 
-                <Text style={styles.linearText}>Finish Setup</Text>
-            </LinearGradient>
+                    <Text style={styles.linearText}>Finish Setup</Text>
+                </LinearGradient>
             </TouchableOpacity>
-            <View style={{alignItems: "center"}}>
+            <View style={{ alignItems: "center" }}>
                 <Text style={[styles.secondaryText, { color: "white", textDecorationLine: 'underline' }]}>Need help? Chat with us</Text>
             </View>
         </View>

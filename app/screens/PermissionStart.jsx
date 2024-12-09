@@ -5,14 +5,16 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { LinearGradient } from "expo-linear-gradient";
 
 
-const PermissionStart = ({navigation}) => {
+const PermissionStart = ({ navigation }) => {
 
-    const nav=()=>{
-        navigation.navigate("PreAppSelection")
+    const nav = () => {
+        navigation.navigate("MainPermission")
     }
 
     return (
         <SafeAreaView style={{ backgroundColor: "#1F7B55" }}>
+            <StatusBar barStyle="default" />
+
             <Text style={styles.topText}>AWESOME!</Text>
             <View style={{ height: hp('40%'), width: wp('100%') }}>
                 <TypeWriter
@@ -27,15 +29,15 @@ const PermissionStart = ({navigation}) => {
                 </TypeWriter>
             </View>
             <TouchableOpacity onPress={nav} >
-            <LinearGradient
-                colors={["#ff3131", "#ff914d"]}
-                start={{ x: 0, y: 1 }}
-                end={{ x: 1, y: 0 }}
-                style={styles.linearGrad}
-            >
+                <LinearGradient
+                    colors={["#ff3131", "#ff914d"]}
+                    start={{ x: 0, y: 1 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.linearGrad}
+                >
 
-                <Text style={styles.linearText}>Start</Text>
-            </LinearGradient>
+                    <Text style={styles.linearText}>Start</Text>
+                </LinearGradient>
             </TouchableOpacity>
             <Text style={[styles.thirdText, { marginTop: hp('5%') }]}>Your information is protected by
                 <Text style={{ color: "#ff3131" }}>APP NAME</Text> and will stay</Text>

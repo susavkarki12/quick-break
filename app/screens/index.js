@@ -1,2 +1,2 @@
 export { default as OnBoardingScreen } from "./OnBoardingScreen";
-export { default as Dashboard } from "./DashBoard";
+export { default as DashBoard } from "./DashBoard";

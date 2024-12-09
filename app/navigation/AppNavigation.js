@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Dashboard, OnBoardingScreen } from "../screens";
+import { DashBoard, OnBoardingScreen } from "../screens";
 import { Setting } from "../screens/Setting";
 import MainPermission from "../screens/MainPermission";
 
@@ -22,7 +22,7 @@ const AppNavigation = () => {
       }}
     >
       <AppStack.Screen name="OnBoard" component={OnBoardingScreen} />
-      <AppStack.Screen name="DashBoard" component={Dashboard} />
+      <AppStack.Screen name="DashBoard" component={DashBoard} />
       <AppStack.Screen name="Setting" component= {Setting} />
       <AppStack.Screen name="vip" component={VipComponent} />
       <AppStack.Screen name="MainPermission" component= {MainPermission} />
